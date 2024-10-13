@@ -10,31 +10,15 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
-public class PaymentService {
+abstract public class PaymentService {
+  abstract BigDecimal getExchangeRate(String fromCurrencyType, String toCurrencyType) throws IOException;
 
   // Currency API: https://open.er-api.com/v6/latest/USD
-  public Payment prepare(Long orderId, String currencyType, BigDecimal originalAmount) throws IOException {
-    URL url = new URL("https://open.er-api.com/v6/latest/USD" + currencyType);
-    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-    String response = br.lines().collect(Collectors.joining());
-    br.close();
-
-    ObjectMapper mapper = new ObjectMapper();
-    ExchangeRateData data = mapper.readValue(response, ExchangeRateData.class);
-    BigDecimal exchangeRate = data.rates().get(currencyType);
-
+  public Payment prepare(Long orderId, String fromCurrencyType, String toCurrencyType, BigDecimal originalAmount) throws IOException {
+    BigDecimal exchangeRate = getExchangeRate(fromCurrencyType, toCurrencyType);
     BigDecimal convertedAmount = originalAmount.multiply(exchangeRate);
-
     LocalDateTime validUntil = LocalDateTime.now().plusMinutes(30);
 
-    return new Payment(orderId, currencyType, exchangeRate, originalAmount, convertedAmount, validUntil);
-
-  }
-
-  public static void main(String[] args) throws IOException {
-    PaymentService paymentService = new PaymentService();
-    Payment payment = paymentService.prepare(100L, "USD", BigDecimal.valueOf(50.7));
-    System.out.println(payment);
+    return new Payment(orderId, toCurrencyType, exchangeRate, originalAmount, convertedAmount, validUntil);
   }
 }
