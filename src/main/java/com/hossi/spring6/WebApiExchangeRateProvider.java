@@ -9,9 +9,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class WebApiExchangeRateProvider {
+public class WebApiExchangeRateProvider implements ExchangeProvider {
 
-  BigDecimal getExchangeRate(String fromCurrencyType, String toCurrencyType) throws IOException {
+  @Override
+  public BigDecimal getExchangeRate(String fromCurrencyType, String toCurrencyType) throws IOException {
     URL url = new URL("https://open.er-api.com/v6/latest/" + fromCurrencyType);
     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));

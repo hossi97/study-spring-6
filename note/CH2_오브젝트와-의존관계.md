@@ -50,7 +50,7 @@
       ```
      - 템플릿 메소드 패턴
      - 팩토리 메소드 패턴
-  3. [클래스의 분리]
+  3. [클래스의 분리](https://github.com/hossi97/study-spring-6/commit/3e9e015437556cd5cebe544ad9bae555fef8bb2a)
      ```java
      public class PaymentService {
        private final WebApiExchangeRateProvider exchangeRateProvider;
@@ -68,4 +68,22 @@
          return new Payment(orderId, toCurrencyType, exchangeRate, originalAmount, convertedAmount, validUntil);
        }
      }
+     ```
+  4. 인터페이스를 통한 확장
+     - Compile Dependency: PaymentService ExchangeRateProvider
+     - Runtime Dependency: PaymentService WebApiExchangeRateProvider
+     - 관계 설정의 책임을 PaymentService에서 분리
+     - 관계 설정은 클라이언트에서 하고, 사용은 PaymentService 에서 함
+     ```java
+     public class Client {
+       public static void main(String[] args) throws IOException {
+         PaymentService paymentService = new PaymentService(new WebApiExchangeRateProvider());
+         Payment payment = paymentService.prepare(100L, "USD", "KRW", BigDecimal.valueOf(50.7));
+         System.out.println(payment);
+       }
+     }
+     ```
+  5. 오브젝트 팩토리
+     ```java
+     
      ```

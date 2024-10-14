@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class PaymentService {
-  private final WebApiExchangeRateProvider exchangeRateProvider;
+  private final ExchangeProvider exchangeRateProvider;
 
-  public PaymentService() {
-    this.exchangeRateProvider = new WebApiExchangeRateProvider();
+  public PaymentService(ExchangeProvider exchangeRateProvider) {
+    this.exchangeRateProvider = exchangeRateProvider;
   }
 
   // Currency API: https://open.er-api.com/v6/latest/USD
