@@ -9,9 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class WebApiPaymentService extends PaymentService {
+public class WebApiExchangeRateProvider {
 
-  @Override
   BigDecimal getExchangeRate(String fromCurrencyType, String toCurrencyType) throws IOException {
     URL url = new URL("https://open.er-api.com/v6/latest/" + fromCurrencyType);
     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
