@@ -85,5 +85,13 @@
      ```
   5. 오브젝트 팩토리
      ```java
-     
+     public class ObjectFactory {
+       public PaymentService paymentService() {
+         return new PaymentService(exchangeRateProvider());
+       }
+
+       private ExchangeProvider exchangeRateProvider() {
+         return new WebApiExchangeRateProvider();
+       }
+     }
      ```
