@@ -95,3 +95,18 @@
        }
      }
      ```
+
+### 위의 코드에 적용된 객체지향 원칙과 패턴
+> 원칙과 패턴을 적용했을 때의 핵심은 **변화에 대한 비용이 적다**는 것
+  1. OCP (Open Closed Principle)
+     - 기능을 확장할 때 코드의 변경이 없어야 한다.
+  2. High Coherence, Low Coupling
+     - 높은 응집도: 하나의 모듈은 하나의 책임과 관심사를 갖는다.
+     - 낮은 결합도: 상호작용하는 모듈 간에는 서로 다른 책임과 관심사를 갖는다.
+  3. Strategy Pattern
+     - 기능 맥락(= `PaymentService`)에서 변경이 필요한 로직을 인터페이스(= `ExchangeRateProvider`)를 통해 외부로 분리
+     - 구체적인 알고리즘 클래스(= `WebApiExchangeProvider`)를 필요에 따라 바꿔서 사용
+     - Java 에서는 Comparator 클래스를 이용해 Sorting 전략을 바꾸는 것도 전략 패턴의 일종
+  4. Inversion of Control
+     - PaymentService 가 ExchangeProvider 구현체를 제어하던 부분을 Client 에서 제어하도록 변경 → 프레임워크의 제어의 역전과는 다름
+
