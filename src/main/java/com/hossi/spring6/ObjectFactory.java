@@ -10,6 +10,14 @@ import org.springframework.context.annotation.Configuration;
  * (기본적으로 구현체를 Singleton 으로 유지)
  */
 @Configuration
-@ComponentScan
 public class ObjectFactory {
+  @Bean
+  public PaymentService paymentService() {
+    return new PaymentService(exchangeRateProvider());
+  }
+
+  @Bean
+  public ExchangeProvider exchangeRateProvider() {
+    return new WebApiExchangeRateProvider();
+  }
 }
