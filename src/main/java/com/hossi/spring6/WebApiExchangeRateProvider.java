@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WebApiExchangeRateProvider implements ExchangeProvider {
 
   @Override
