@@ -1,4 +1,4 @@
-package com.hossi.spring6;
+package com.hossi.spring6.exchangeRate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;

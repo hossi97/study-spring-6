@@ -1,5 +1,6 @@
-package com.hossi.spring6;
+package com.hossi.spring6.exchangeRate;
 
+import com.hossi.spring6.payment.ExchangeProvider;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

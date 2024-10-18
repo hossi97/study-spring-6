@@ -1,7 +1,10 @@
 package com.hossi.spring6;
 
+import com.hossi.spring6.exchangeRate.CachedExchangeRateProvider;
+import com.hossi.spring6.payment.ExchangeProvider;
+import com.hossi.spring6.exchangeRate.WebApiExchangeRateProvider;
+import com.hossi.spring6.payment.PaymentService;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**

@@ -140,3 +140,5 @@ public class CachedExchangeRateProvider implements ExchangeProvider {
 ### DIP (Dependency Inversion Principle)
 - 상위 모듈은 하위 모듈에 의존하면 안 되며, 둘 다 추상화에 의존해야 한다.
 - 추상화는 구체적인 사항에 의존하면 안 된다.
+- 이를 충족하기 위한 Seperated Interface 패턴
+  - ExchangeProvider 인터페이스를 payment 패키지에 귀속시킴

@@ -1,9 +1,8 @@
-package com.hossi.spring6;
+package com.hossi.spring6.payment;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import org.springframework.stereotype.Component;
 
 public class PaymentService {
   private final ExchangeProvider exchangeRateProvider;

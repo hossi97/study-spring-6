@@ -1,6 +1,7 @@
-package com.hossi.spring6;
+package com.hossi.spring6.exchangeRate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hossi.spring6.payment.ExchangeProvider;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,7 +9,6 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Component;
 
 public class WebApiExchangeRateProvider implements ExchangeProvider {
 

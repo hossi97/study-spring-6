@@ -1,4 +1,4 @@
-package com.hossi.spring6;
+package com.hossi.spring6.payment;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
