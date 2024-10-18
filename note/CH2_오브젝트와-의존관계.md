@@ -110,3 +110,33 @@
   4. Inversion of Control
      - PaymentService 가 ExchangeProvider 구현체를 제어하던 부분을 Client 에서 제어하도록 변경 → 프레임워크의 제어의 역전과는 다름
 
+### 싱글톤 패턴의 단점
+- 싱글톤 패턴은 객체를 반환하는 메서드가 public static 하기 때문에 멀티 스레딩 환경이나 연속적인 테스트에 사용할 때는 주의가 필요하다.
+- 이와 더불어, 기본 생성자가 private 하므로 상속에 어려움이 있고, 인터페이스와 함께 사용하지 않으면 객체의 수정에 민감하여 의존성이 커질 수 있다.
+
+### 데코레이터 패턴을 이용한 API 캐싱
+```java
+public class CachedExchangeRateProvider implements ExchangeProvider {
+  private final ExchangeProvider target;
+  private BigDecimal cachedExchangeRate;
+  private LocalDateTime cacheExpiryTime;
+
+  public CachedExchangeRateProvider(ExchangeProvider target) {
+    this.target = target;
+  }
+
+  @Override
+  public BigDecimal getExchangeRate(String fromCurrencyType, String toCurrencyType) throws IOException {
+    if (cachedExchangeRate == null || cacheExpiryTime.isBefore(LocalDateTime.now())) {
+      cachedExchangeRate = target.getExchangeRate(fromCurrencyType, toCurrencyType);
+      cacheExpiryTime = LocalDateTime.now().plusSeconds(3);
+      System.out.println("Cache Updated");
+    }
+    return cachedExchangeRate;
+  }
+}
+```
+
+### DIP (Dependency Inversion Principle)
+- 상위 모듈은 하위 모듈에 의존하면 안 되며, 둘 다 추상화에 의존해야 한다.
+- 추상화는 구체적인 사항에 의존하면 안 된다.

@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
-@Component
 public class PaymentService {
   private final ExchangeProvider exchangeRateProvider;
 

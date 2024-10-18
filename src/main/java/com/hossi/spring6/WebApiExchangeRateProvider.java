@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
-@Component
 public class WebApiExchangeRateProvider implements ExchangeProvider {
 
   @Override
@@ -23,7 +22,10 @@ public class WebApiExchangeRateProvider implements ExchangeProvider {
 
     ObjectMapper mapper = new ObjectMapper();
     ExchangeRateData data = mapper.readValue(response, ExchangeRateData.class);
+
     BigDecimal exchangeRate = data.rates().get(toCurrencyType);
+    System.out.println("API ExRate: " + exchangeRate);
+
     return exchangeRate;
   }
 }
