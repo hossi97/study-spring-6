@@ -38,4 +38,28 @@ public class Payment {
         ", vaildUntil=" + vaildUntil +
         '}';
   }
+
+  public Long getOrderId() {
+    return orderId;
+  }
+
+  public String getCurrencyType() {
+    return currencyType;
+  }
+
+  public BigDecimal getExchangeRate() {
+    return exchangeRate;
+  }
+
+  public BigDecimal getOriginalAmount() {
+    return originalAmount;
+  }
+
+  public BigDecimal getConvertedAmount() {
+    return convertedAmount;
+  }
+
+  public LocalDateTime getVaildUntil() {
+    return vaildUntil;
+  }
 }
