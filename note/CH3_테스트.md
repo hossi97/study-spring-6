@@ -16,3 +16,10 @@
   - PaymentServiceTest
 - 협력자 (의존하고 있는):
   - WebApiExchangeProvider → ExchangeRateStub (Test Double or Imposter 라고 부름)
+
+### 수동 DI를 이용한 테스트
+- 원하는 결과 값을 반환하도록 임의의 테스트 전용 객체를 생성해서 테스트에 활용할 수 있음
+
+### Spring DI를 이용한 테스트
+- @ContextConfiguration
+- @Autowired
