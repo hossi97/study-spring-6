@@ -19,7 +19,12 @@
 
 ### 수동 DI를 이용한 테스트
 - 원하는 결과 값을 반환하도록 임의의 테스트 전용 객체를 생성해서 테스트에 활용할 수 있음
+- @ExtendWith(MockitoExtension.class)
+- @Mock
+- @Spy
+- @InjectMock
 
 ### Spring DI를 이용한 테스트
+- @ExtendWith(SpringExtension.class)
 - @ContextConfiguration
 - @Autowired
