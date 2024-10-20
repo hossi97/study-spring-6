@@ -1,6 +1,7 @@
 package com.hossi.spring6.payment;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.LocalDateTime;
 
 public class Payment {
@@ -11,7 +12,7 @@ public class Payment {
   private BigDecimal convertedAmount;
   private LocalDateTime vaildUntil;
 
-  public Payment(
+  private Payment(
       Long orderId,
       String currencyType,
       BigDecimal exchangeRate,
@@ -25,6 +26,22 @@ public class Payment {
     this.originalAmount = originalAmount;
     this.convertedAmount = convertedAmount;
     this.vaildUntil = vaildUntil;
+  }
+
+  public static Payment createPrepared(
+      Long orderId,
+      String currencyType,
+      BigDecimal exchangeRate,
+      BigDecimal originalAmount,
+      LocalDateTime now
+    ) {
+    BigDecimal convertedAmount = originalAmount.multiply(exchangeRate);
+    LocalDateTime validUntil = now.plusMinutes(30);
+    return new Payment(orderId, currencyType, exchangeRate, originalAmount, convertedAmount, validUntil);
+  }
+
+  public boolean isValid(Clock clock) {
+    return LocalDateTime.now(clock).isBefore(this.vaildUntil);
   }
 
   @Override

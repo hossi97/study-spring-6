@@ -28,3 +28,11 @@
 - @ExtendWith(SpringExtension.class)
 - @ContextConfiguration
 - @Autowired
+
+### Clock 을 이용한 시간 테스트
+- 제한시간을 정확하게 측정하고 테스트하기 위해서는 시작 시간에 주기를 정확하게 더해줘야 한다.
+- 이를 위해서 Clock 객체를 사용할 수 있다.
+
+### 도메인 주도 개발
+- Payment 와 같은 객체에 로직을 추가하는 형태
+- ex. 생성자 대신 정적 팩토리 메서드를 활용하여 의미 있는 이름과 적절한 로직을 추가할 수 있다.
