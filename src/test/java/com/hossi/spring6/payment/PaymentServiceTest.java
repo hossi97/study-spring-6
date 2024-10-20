@@ -49,7 +49,7 @@ class PaymentServiceTest {
 
   @Test
   @DisplayName("prepare 메서드가 요구사항 3가지를 충족했는지를 검증")
-  void prepare() throws IOException {
+  void prepare() {
     Payment payment = paymentService.prepare(1L, "USD", "KRW", BigDecimal.TEN);
 
     // 1. 환율 정보 가져오기
@@ -68,7 +68,7 @@ class PaymentServiceTest {
 
   @Test
   @DisplayName("유효시간이 제대로 검증되는가")
-  void isValid() throws IOException {
+  void isValid() {
     Payment payment = paymentService.prepare(1L, "USD", "KRW", BigDecimal.TEN);
     assertThat(payment.isValid(clock)).isTrue();
     assertThat(payment.isValid(Clock.offset(clock, Duration.of(30, ChronoUnit.MINUTES)))).isFalse();

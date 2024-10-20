@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 public interface ExchangeProvider {
-  BigDecimal getExchangeRate(String fromCurrencyType, String toCurrencyType) throws IOException;
+  BigDecimal getExchangeRate(String fromCurrencyType, String toCurrencyType);
 }

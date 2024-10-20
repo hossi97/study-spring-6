@@ -15,7 +15,7 @@ public class PaymentService {
   }
 
   // Currency API: https://open.er-api.com/v6/latest/USD
-  public Payment prepare(Long orderId, String fromCurrencyType, String toCurrencyType, BigDecimal originalAmount) throws IOException {
+  public Payment prepare(Long orderId, String fromCurrencyType, String toCurrencyType, BigDecimal originalAmount) {
     BigDecimal exchangeRate = exchangeRateProvider.getExchangeRate(fromCurrencyType, toCurrencyType);
     return Payment.createPrepared(orderId, toCurrencyType, exchangeRate, originalAmount, LocalDateTime.now(clock));
   }
