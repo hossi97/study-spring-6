@@ -4,6 +4,7 @@ import com.hossi.spring6.exchangeRate.CachedExchangeRateProvider;
 import com.hossi.spring6.payment.ExchangeProvider;
 import com.hossi.spring6.exchangeRate.WebApiExchangeRateProvider;
 import com.hossi.spring6.payment.PaymentService;
+import java.time.Clock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,10 +14,10 @@ import org.springframework.context.annotation.Configuration;
  * (기본적으로 구현체를 Singleton 으로 유지)
  */
 @Configuration
-public class ObjectFactory {
+public class PaymentConfig {
   @Bean
   public PaymentService paymentService() {
-    return new PaymentService(cachedExchangeRateProvider());
+    return new PaymentService(cachedExchangeRateProvider(), clock());
   }
 
   @Bean
@@ -27,5 +28,10 @@ public class ObjectFactory {
   @Bean
   public ExchangeProvider exchangeRateProvider() {
     return new WebApiExchangeRateProvider();
+  }
+
+  @Bean
+  public Clock clock() {
+    return Clock.systemDefaultZone();
   }
 }
