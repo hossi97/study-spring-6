@@ -1,12 +1,14 @@
 package com.hossi.spring6;
 
 import com.hossi.spring6.exchangeRate.CachedExchangeRateProvider;
+import com.hossi.spring6.exchangeRate.RestTemplateExchangeRateProvider;
 import com.hossi.spring6.payment.ExchangeProvider;
 import com.hossi.spring6.exchangeRate.WebApiExchangeRateProvider;
 import com.hossi.spring6.payment.PaymentService;
 import java.time.Clock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * BeanFactory 에 제공할 Bean 클래스 & 의존관계에 대한 구성 정보
@@ -17,17 +19,17 @@ import org.springframework.context.annotation.Configuration;
 public class PaymentConfig {
   @Bean
   public PaymentService paymentService() {
-    return new PaymentService(cachedExchangeRateProvider(), clock());
+    return new PaymentService(exchangeRateProvider(), clock());
   }
 
   @Bean
-  public ExchangeProvider cachedExchangeRateProvider() {
-    return new CachedExchangeRateProvider(exchangeRateProvider());
+  public RestTemplate restTemplate() {
+    return new RestTemplate(/* 원하는 전략 객체를 할당 */);
   }
 
   @Bean
   public ExchangeProvider exchangeRateProvider() {
-    return new WebApiExchangeRateProvider();
+    return new RestTemplateExchangeRateProvider(restTemplate());
   }
 
   @Bean
