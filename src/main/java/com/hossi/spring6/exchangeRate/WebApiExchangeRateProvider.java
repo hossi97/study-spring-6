@@ -1,23 +1,25 @@
 package com.hossi.spring6.exchangeRate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hossi.spring6.api.ApiExecutor;
+import com.hossi.spring6.api.ExchangeRateExtractor;
+import com.hossi.spring6.api.WebApiExecutor;
+import com.hossi.spring6.api.JacksonExchangeRateExtractor;
 import com.hossi.spring6.payment.ExchangeProvider;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.stream.Collectors;
 
 public class WebApiExchangeRateProvider implements ExchangeProvider {
 
   @Override
   public BigDecimal getExchangeRate(String fromCurrencyType, String toCurrencyType) {
     String url = "https://open.er-api.com/v6/latest/" + fromCurrencyType;
+    return executeApiForExchangeRate(toCurrencyType, url, new WebApiExecutor(), new JacksonExchangeRateExtractor());
+  }
+
+  private static BigDecimal executeApiForExchangeRate(String toCurrencyType, String url, ApiExecutor apiExecutor, ExchangeRateExtractor exchangeRateExtractor) {
     URI uri;
     try {
       uri = new URI(url);
@@ -27,22 +29,16 @@ public class WebApiExchangeRateProvider implements ExchangeProvider {
 
     String response;
     try {
-      HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
-      try(BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-        response = br.lines().collect(Collectors.joining());
-      }
+      response = apiExecutor.execute(uri);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
 
-    ObjectMapper mapper = new ObjectMapper();
-    ExchangeRateData data;
     try {
-      data = mapper.readValue(response, ExchangeRateData.class);
-      BigDecimal exchangeRate = data.rates().get(toCurrencyType);
-      return exchangeRate;
+      return exchangeRateExtractor.extractExchangeRate(toCurrencyType, response);
     } catch (JsonProcessingException e) {
       throw new RuntimeException(e);
     }
   }
+
 }
