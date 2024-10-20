@@ -1,5 +1,7 @@
 package com.hossi.spring6;
 
+import com.hossi.spring6.data.OrderRepository;
+import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,5 +31,10 @@ public class DataConfig {
     }});
 
     return emf;
+  }
+
+  @Bean
+  public OrderRepository orderRepository(EntityManagerFactory emf) {
+    return new OrderRepository(emf);
   }
 }
