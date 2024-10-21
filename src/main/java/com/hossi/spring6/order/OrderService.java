@@ -4,15 +4,16 @@ import com.hossi.spring6.data.JpaOrderRepository;
 import java.math.BigDecimal;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 @Service
 public class OrderService {
 
   private final JpaOrderRepository orderRepository;
-  private final JpaTransactionManager transactionManager;
+  private final PlatformTransactionManager transactionManager;
 
-  public OrderService(JpaOrderRepository orderRepository, JpaTransactionManager transactionManager) {
+  public OrderService(JpaOrderRepository orderRepository, PlatformTransactionManager transactionManager) {
     this.orderRepository = orderRepository;
     this.transactionManager = transactionManager;
   }
