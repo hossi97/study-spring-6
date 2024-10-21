@@ -8,3 +8,12 @@
 - PlatformTransactionManager: 앱 로컬 트랜잭션 매니저 / 글로벌 트랜잭션 매니저는 따로 있음
   - JpaTransactionManager → JPA Transaction 에 대한 어댑터
   - DataSourceTransactionManager → JDBC Transaction 에 대한 어댑터
+
+### 프록시 패턴
+- 타깃을 대신해서 아래와 같은 기능을 제공
+  - 접근 제어
+  - 원격 접속
+  - 보안
+  - 지연
+
+### 

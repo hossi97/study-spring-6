@@ -2,11 +2,10 @@ package com.hossi.spring6;
 
 import com.hossi.spring6.order.Order;
 import com.hossi.spring6.order.OrderService;
+import com.hossi.spring6.order.OrderServiceImpl;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.orm.jpa.JpaTransactionManager;
 
 public class OrderClient {
 
