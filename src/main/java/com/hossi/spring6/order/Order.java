@@ -25,6 +25,10 @@ public class Order {
     this.totalPrice = totalPrice;
   }
 
+  public Long getId() {
+    return id;
+  }
+
   public String getNo() {
     return no;
   }

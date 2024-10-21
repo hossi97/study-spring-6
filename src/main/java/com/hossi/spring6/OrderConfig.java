@@ -1,6 +1,6 @@
 package com.hossi.spring6;
 
-import com.hossi.spring6.data.OrderRepository;
+import com.hossi.spring6.data.JpaOrderRepository;
 import com.hossi.spring6.order.OrderService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +11,12 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 @Import(DataConfig.class)
 public class OrderConfig {
   @Bean
-  public OrderRepository orderRepository() {
-    return new OrderRepository();
+  public JpaOrderRepository orderRepository() {
+    return new JpaOrderRepository();
   }
 
   @Bean
-  public OrderService orderService(OrderRepository orderRepository, JpaTransactionManager transactionManager) {
+  public OrderService orderService(JpaOrderRepository orderRepository, JpaTransactionManager transactionManager) {
     return new OrderService(orderRepository, transactionManager);
   }
 }

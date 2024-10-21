@@ -1,6 +1,5 @@
 package com.hossi.spring6;
 
-import com.hossi.spring6.data.OrderRepository;
 import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.config.BeanPostProcessor;
