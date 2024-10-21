@@ -2,6 +2,7 @@ package com.hossi.spring6.order;
 
 import com.hossi.spring6.data.JpaOrderRepository;
 import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -25,5 +26,15 @@ public class OrderService {
       this.orderRepository.save(order);
       return order;
     });
+  }
+
+  public List<Order> createOrders(List<OrderRequest> requests) {
+    return new TransactionTemplate(transactionManager).execute(status ->
+      requests.stream().map(req -> {
+        Order order = new Order(req.no(), req.totalPrice());
+        this.orderRepository.save(order);
+        return order;
+      }).toList()
+    );
   }
 }
